@@ -5,16 +5,18 @@ import com.example.library.books.models.BookDto;
 import com.example.library.books.models.CreateBookDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import com.example.library.books.models.SearchRequest;
 
 public interface BookService {
 
-    BookDto updateBook(BookDto book);
+    BookDto createBook(final CreateBookDto bookDto);
 
-    BookDto getBook(String id);
+    BookDto getBook(final String id);
 
-    void deleteBook(String id);
+    BookDto updateBook(final BookDto book);
 
-    Page<Book> getBooksBy(String searchField, String searchValue, Pageable pageable);
+    void deleteBook(final String id);
 
-    BookDto createBook(CreateBookDto bookDto);
+    Page<Book> getBooksBy(final SearchRequest request,final Pageable pageable);
+
 }

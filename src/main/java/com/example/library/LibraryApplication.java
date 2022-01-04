@@ -2,6 +2,7 @@ package com.example.library;
 
 import com.example.library.books.BooksRepository;
 import com.example.library.books.models.Book;
+import com.example.library.jms.BooksSender;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -9,34 +10,27 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.jms.annotation.EnableJms;
-import org.springframework.jms.core.JmsTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @SpringBootApplication
-@EnableJms
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class LibraryApplication implements CommandLineRunner {
 
     BooksRepository repository;
-    JmsTemplate jmsTemplate;
+    BooksSender sender;
 
     public static void main(String[] args) {
-       SpringApplication.run(LibraryApplication.class, args);
+        SpringApplication.run(LibraryApplication.class, args);
     }
 
     @Override
     public void run(String... args) {
         repository.deleteAll();
-        repository.saveAll(mockedBooks());
-
-        log.info("Sending an a book message");
-        jmsTemplate.convertAndSend("library", new Book("Dune", "Frank", "Science fiction"));
+        mockedBooks().forEach(sender::send);
     }
 
     private List<Book> mockedBooks() {
@@ -49,4 +43,5 @@ public class LibraryApplication implements CommandLineRunner {
         books.add(new Book("The Art of Computer Programming", "Donald Knuth", "Non-fiction"));
         return books;
     }
+
 }

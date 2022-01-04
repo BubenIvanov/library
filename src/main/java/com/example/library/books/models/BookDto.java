@@ -1,10 +1,10 @@
 package com.example.library.books.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
 @EqualsAndHashCode(callSuper = true)
@@ -13,8 +13,8 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookDto extends CreateBookDto {
-    String id;
 
+    String id;
     String message;
 
     public BookDto(Book book) {

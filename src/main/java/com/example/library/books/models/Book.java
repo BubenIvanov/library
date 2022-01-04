@@ -7,12 +7,14 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Document
-public class Book {
+public class Book implements Serializable {
 
     @Id
     String id;
@@ -33,7 +35,7 @@ public class Book {
     }
 
     public Book(BookDto bookDto) {
-        this.name = bookDto.getId();
+        this.id = bookDto.getId();
         this.name = bookDto.getName();
         this.author = bookDto.getAuthor();
         this.genre = bookDto.getGenre();

@@ -7,20 +7,25 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.handler.annotation.Headers;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
+
+import javax.jms.Message;
+import javax.jms.Session;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class Receiver {
+@RequiredArgsConstructor
+public class BooksConsumer {
 
     BooksRepository booksRepository;
 
-    @JmsListener(destination = "library", containerFactory = "myFactory")
-    public void receiveMessage(Book book) {
-        log.info("Received <" + book + ">");
+    @JmsListener(destination = "books-queue")
+    public void receiveMessage(@Payload Book book, @Headers MessageHeaders headers, Message message, Session session) {
         booksRepository.save(book);
+        log.info("received & saved <" + book.getName() + ">");
     }
-
 }
