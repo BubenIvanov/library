@@ -50,12 +50,12 @@ public class BooksServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBook(String id) {
+    public void deleteBook(final String id) {
         repository.deleteById(id);
     }
 
     @Override
-    public Page<Book> getBooksBy(SearchRequest request, Pageable pageable) {
+    public Page<Book> getBooksBy(final SearchRequest request,final Pageable pageable) {
         Criteria regexCriteria = Criteria.where(request.getSearchField().getValue())
                 //case sensitive
                 .regex(request.getSearchValue());
