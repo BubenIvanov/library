@@ -1,11 +1,14 @@
-package com.example.library.books.models;
+package com.example.library.dto;
 
+import com.example.library.entity.Book;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+
+import javax.validation.constraints.NotNull;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -14,6 +17,7 @@ import lombok.experimental.FieldDefaults;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookDto extends CreateBookDto {
 
+    @NotNull
     String id;
     String message;
 

@@ -1,4 +1,4 @@
-package com.example.library.books.models;
+package com.example.library.dto;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;

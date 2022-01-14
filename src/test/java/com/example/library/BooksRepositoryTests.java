@@ -1,8 +1,6 @@
 package com.example.library;
 
 
-import com.example.library.books.models.Book;
-
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest

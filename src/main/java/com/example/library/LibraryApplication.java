@@ -1,7 +1,7 @@
 package com.example.library;
 
-import com.example.library.books.BooksRepository;
-import com.example.library.books.models.Book;
+import com.example.library.dao.BooksRepository;
+import com.example.library.entity.Book;
 import com.example.library.jms.BooksSender;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -35,11 +35,13 @@ public class LibraryApplication implements CommandLineRunner {
 
     private List<Book> mockedBooks() {
         List<Book> books = new ArrayList<>();
-        books.add(new Book("The Hobbit", "John Tolkien", "fantacy"));
-        books.add(new Book("The Lord of the Rings", "John Tolkien", "fantacy"));
-        books.add(new Book("The Silmarillion", "John Tolkien", "fantacy"));
-        books.add(new Book("Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", "fantacy"));
-        books.add(new Book("A Storm of Swords", "George R.R. Martin", "fantacy"));
+        String johnTolkien = "John Tolkien";
+        String fantacyGenre = "fantacy";
+        books.add(new Book("The Hobbit", johnTolkien, fantacyGenre));
+        books.add(new Book("The Lord of the Rings", johnTolkien, fantacyGenre));
+        books.add(new Book("The Silmarillion", johnTolkien, fantacyGenre));
+        books.add(new Book("Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", fantacyGenre));
+        books.add(new Book("A Storm of Swords", "George R.R. Martin", fantacyGenre));
         books.add(new Book("The Art of Computer Programming", "Donald Knuth", "Non-fiction"));
         return books;
     }

@@ -1,11 +1,11 @@
-package com.example.library.books;
+package com.example.library.service;
 
-import com.example.library.books.models.Book;
-import com.example.library.books.models.BookDto;
-import com.example.library.books.models.CreateBookDto;
+import com.example.library.entity.Book;
+import com.example.library.dto.BookDto;
+import com.example.library.dto.CreateBookDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import com.example.library.books.models.SearchRequest;
+import com.example.library.dto.SearchRequest;
 
 public interface BookService {
 

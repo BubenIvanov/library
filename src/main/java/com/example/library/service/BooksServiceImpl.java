@@ -1,10 +1,11 @@
-package com.example.library.books;
+package com.example.library.service;
 
-import com.example.library.books.exceptions.UnexistedIdException;
-import com.example.library.books.models.Book;
-import com.example.library.books.models.BookDto;
-import com.example.library.books.models.CreateBookDto;
-import com.example.library.books.models.SearchRequest;
+import com.example.library.dao.BooksRepository;
+import com.example.library.exceptions.UnexistedIdException;
+import com.example.library.entity.Book;
+import com.example.library.dto.BookDto;
+import com.example.library.dto.CreateBookDto;
+import com.example.library.dto.SearchRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -55,10 +56,9 @@ public class BooksServiceImpl implements BookService {
     }
 
     @Override
-    public Page<Book> getBooksBy(final SearchRequest request,final Pageable pageable) {
+    public Page<Book> getBooksBy(final SearchRequest request, final Pageable pageable) {
         Criteria regexCriteria = Criteria.where(request.getSearchField().getValue())
-                //case sensitive
-                .regex(request.getSearchValue());
+                .regex(request.getSearchValue(), "i");
         Query query = new Query()
                 .with(pageable)
                 .addCriteria(regexCriteria);

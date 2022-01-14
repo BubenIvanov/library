@@ -1,6 +1,6 @@
 package com.example.library.jms;
 
-import com.example.library.books.models.Book;
+import com.example.library.entity.Book;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

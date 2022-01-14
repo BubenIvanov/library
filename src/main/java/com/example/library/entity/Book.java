@@ -1,5 +1,7 @@
-package com.example.library.books.models;
+package com.example.library.entity;
 
+import com.example.library.dto.BookDto;
+import com.example.library.dto.CreateBookDto;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;

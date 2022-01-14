@@ -1,7 +1,7 @@
 package com.example.library.jms;
 
-import com.example.library.books.BooksRepository;
-import com.example.library.books.models.Book;
+import com.example.library.dao.BooksRepository;
+import com.example.library.entity.Book;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

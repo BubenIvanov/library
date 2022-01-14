@@ -1,6 +1,6 @@
-package com.example.library.books.exceptions;
+package com.example.library.exceptions;
 
-import com.example.library.books.models.BookDto;
+import com.example.library.dto.BookDto;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
