@@ -23,7 +23,7 @@ public class BooksController implements BookApi {
     BooksServiceImpl booksService;
 
     @Override
-    public BookDto createBook(CreateBookDto bookDto) {
+    public BookDto createBook(final CreateBookDto bookDto) {
         return booksService.createBook(bookDto);
     }
 
