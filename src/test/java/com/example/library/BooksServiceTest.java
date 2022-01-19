@@ -1,12 +1,11 @@
-package com.example.library.service;
+package com.example.library;
 
 import com.example.library.dao.BooksRepository;
 import com.example.library.dto.BookDto;
-import com.example.library.dto.CreateBookDto;
 import com.example.library.dto.SearchField;
-import com.example.library.dto.SearchRequest;
 import com.example.library.entity.Book;
 import com.example.library.exceptions.UnexistedIdException;
+import com.example.library.service.BooksServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,13 +18,12 @@ import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.Collections;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
-class BooksServiceTest {
+class BooksServiceTest extends TestMocks {
 
     @Mock
     BooksRepository repository;
@@ -47,33 +45,6 @@ class BooksServiceTest {
         when(repository.insert(any(Book.class))).thenReturn(bookWithId());
         BookDto bookDto = booksService.createBook(mockCreateBookDto());
         assertNotNull(bookDto.getId(), "[Assertion failed] - this argument is required; it must not be null");
-    }
-
-    Book bookWithId(Book book) {
-        book.setId(UUID.randomUUID().toString());
-        return book;
-    }
-
-    Book bookWithId() {
-        Book book = new Book(mockCreateBookDto());
-        return bookWithId(book);
-    }
-
-    BookDto bookDto() {
-        BookDto bookDto = new BookDto();
-        bookDto.setAuthor("Author");
-        bookDto.setGenre("Genre");
-        bookDto.setName("Name");
-        bookDto.setId(UUID.randomUUID().toString());
-        return bookDto;
-    }
-
-    private CreateBookDto mockCreateBookDto() {
-        CreateBookDto createBookDto = new CreateBookDto();
-        createBookDto.setAuthor("Author");
-        createBookDto.setGenre("Genre");
-        createBookDto.setName("Name");
-        return createBookDto;
     }
 
     @Test
@@ -110,13 +81,6 @@ class BooksServiceTest {
         when(mongoTemplate.find(any(Query.class), any())).thenReturn(Collections.singletonList(bookWithId()));
         Page<Book> booksBy = booksService.getBooksBy(mockedSearchRequest(SearchField.GENRE), Pageable.unpaged());
         assertEquals(1, booksBy.getSize());
-    }
-
-    private SearchRequest mockedSearchRequest(SearchField searchField) {
-        SearchRequest searchRequest = new SearchRequest();
-        searchRequest.setSearchField(searchField);
-        searchRequest.setSearchValue("Joh");
-        return searchRequest;
     }
 
     @Test
